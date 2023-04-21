@@ -40,10 +40,6 @@ async def save_user_to_db(telegram_id, username, first_name, last_name, email, p
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    telegram_id = message.from_user.id
-    username = message.from_user.username
-    first_name = message.from_user.first_name
-    last_name = message.from_user.last_name
     await message.answer("Вітаю! Для реєстрації на сайті натисніть команду /register")
 
 
