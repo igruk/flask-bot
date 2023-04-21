@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{{title}}{% endblock %}</title>
+  <link rel='icon' type='image/x-icon' href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+<div class="box-form">
+	<div class="left">
+		<div class="overlay">
+			<h1>Flask-Bot</h1>
+        	<p>Реєстрація проходить в Телеграм-боті.</p>
+        	<p>Після реєстрації Ви зможете зайти на сторінку облікового запису,<br>
+           		де буде відображатися вся доступна інформація про Ваш Telegram-аккаунт<br>
+           		(фотографія, нікнейм, ім'я).</p>
+        	<p>Ви зможете видалити свій обліковий запис.</p>
+			<span>
+				<a href="{{ url_for('register') }}"><i class="fa fa-telegram"></i> Реєстрація </a>
+			</span>
+		</div>
+	</div>
+        {% block content %}
+
+        {% endblock %}
+</div>
+
+
+<script>
+  const flashMessage = document.querySelector('.alert');
+  if (flashMessage) {
+    flashMessage.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
+

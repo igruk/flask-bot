@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="right">
+	<h5>Login</h5>
+
+	<form action="/login" method="post">
+
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<div class="alert">
+					{{ messages[-1] }}
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				</div>
+			{% endif %}
+		{% endwith %}
+
+		<div class="inputs">
+			<input autofocus type="text" name="email" placeholder="Email">
+			<br>
+			<input type="password" name="password" placeholder="Пароль">
+		</div>
+		<br><br>
+		<div class="remember-me--forget-password">
+				<!-- Angular -->
+		<label for="remember-me">
+			<input type="checkbox" id="remember-me" name="remember">
+    		<span class="text-checkbox">Запам'ятати мене</span>
+		</label>
+		</div>
+		<button type="submit">Вхід</button>
+		<br><br><br>
+	</form>
+	<p>Не маєте облікового запису? <a href="{{ url_for('register') }}">Зареєструйтесь тут</a> Це займе менше хвилини. </p>
+</div>
+{% endblock %}
+

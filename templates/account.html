@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="profile-container">
+  <div class="profile-info">
+
+    <img src="{{ url_for( 'static', filename=user.image) }}" alt="{{ user.username }}">
+    <p><strong>Нікнейм: {{ user.username }}</strong></p>
+    <p><strong>Ім'я: {{ user.first_name }} {{ user.last_name }}</strong> </p>
+    <br>
+    <div class="account">
+    <a href="{{ url_for('logout') }}" method="POST" class="button">Вийти</a><br>
+    <a href="{{ url_for('delete', id=user.id) }}" method="POST" class="btn btn-primary btn-block">Видалити аккаунт</a>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
