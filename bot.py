@@ -88,10 +88,10 @@ async def get_password(message: types.Message, state: FSMContext):
 
     try:
         await save_user_to_db(telegram_id, username, first_name, last_name, email, password, image)
-        await message.answer("Чудово! Тепер Ви можете заходити у свій аккаунт на сайті.")
+        await message.answer("Чудово! Тепер Ви можете заходити у свій аккаунт на сайті /nhttp://igruk.pythonanywhere.com/")
     except Exception as e:
         print(e)
-        await message.answer("Ви вже зареєстровані.")
+        await message.answer("Ви вже зареєстровані")
 
     await state.finish()
 
