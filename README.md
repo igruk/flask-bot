@@ -6,23 +6,24 @@ This is a **Flask** application with registration via **Telegram bot** on **aiog
 
 ![image](https://user-images.githubusercontent.com/88056536/233709354-b6e6096e-ff3c-4a11-9a79-bc42f130906d.png)
 
-When the "Registration" button is pressed, user is redirected to Telegram bot created using the aiogram library.
- 
+When the "Registration" button is pressed, the user is redirected to the Telegram bot created using the Aiogram library.
+
 Telegram bot implements user registration by requesting necessary data.
 
-After registration, user can log in to their account page on the website.
+After registration, users can log in to their account page on the website.
 
-User's account page displays all available information about their Telegram account (name, username, profile picture).
+The user's account page displays all available information about their Telegram account (name, username, profile picture).
 
 User can also delete their account.
 
 ## Technologies Used
 
 - Flask
-- AIOgram
+- Aiogram
 - HTML 5
 - CSS 3
 - Bootstrap 5
+- JavaScript
 - SQLAlchemy
 
 ## Test Task
