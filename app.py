@@ -37,7 +37,7 @@ def load_user(user_id: str) -> Optional[UserMixin]:
 
 
 @app.route('/')
-def index() -> Union[Response, str]:
+def index() -> str:
     """
     Route handler for the home page.
     """
