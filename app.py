@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
+
+from config import KEY, DATABASE
 from models import db, User
 
-
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.secret_key = KEY
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
 
 db.init_app(app)
 with app.app_context():
@@ -33,7 +34,7 @@ def index():
     return render_template('index.html', title='Flask-Bot')
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register')
 def register():
     return redirect('https://t.me/test_task_ihor_bot')
 
@@ -76,8 +77,8 @@ def logout():
 
 @app.route('/delete/<int:id>')
 @login_required
-def delete(id):
-    user = User.query.get(id)
+def delete(pk):
+    user = User.query.get(pk)
     if user:
         logout_user()
         db.session.delete(user)
@@ -90,8 +91,9 @@ def delete(id):
 
 @app.errorhandler(404)
 def page_not_found(error):
+    print(error)
     return render_template('page404.html', title='Сторінку не знайдено')
 
 
-if __name__ == '__main__':
+def run():
     app.run(debug=True)
