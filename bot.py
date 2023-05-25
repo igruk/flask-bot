@@ -5,12 +5,14 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from app import app, generate_password_hash
+from werkzeug.security import generate_password_hash
+
+from app import app
+from config import BOT_TOKEN
 from models import db, User
 
 
-token = os.environ.get('BOT_TOKEN')
-bot = Bot(token=token)
+bot = Bot(token=BOT_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
@@ -21,9 +23,7 @@ class UserState(StatesGroup):
 
 
 async def save_user_to_db(telegram_id, username, first_name, last_name, email, password, image):
-
     password_hash = generate_password_hash(password)
-
     user = User(
         telegram_id=telegram_id,
         username=username,
@@ -75,7 +75,7 @@ async def get_password(message: types.Message, state: FSMContext):
 
     profile_pictures = await dp.bot.get_user_profile_photos(message.from_user.id)
     photo_file = await dp.bot.get_file(profile_pictures.photos[0][-1].file_id)
-    photo_url = f"https://api.telegram.org/file/bot{token}/{photo_file.file_path}"
+    photo_url = f"https://api.telegram.org/file/bot{BOT_TOKEN}/{photo_file.file_path}"
     filename = f"user_{message.from_user.id}_{photo_url.split('/')[-1]}"
     dir_path = "static/images/"
     os.makedirs(dir_path, exist_ok=True)
@@ -88,12 +88,13 @@ async def get_password(message: types.Message, state: FSMContext):
 
     try:
         await save_user_to_db(telegram_id, username, first_name, last_name, email, password, image)
-        await message.answer("Чудово! Тепер Ви можете заходити у свій аккаунт на сайті /nhttp://igruk.pythonanywhere.com/")
+        await message.answer("Чудово! Тепер Ви можете заходити у свій аккаунт на сайті.")
     except Exception as e:
         print(e)
-        await message.answer("Ви вже зареєстровані")
+        await message.answer("Ви вже зареєстровані.")
 
     await state.finish()
 
 
-executor.start_polling(dp, skip_updates=True)
+def start_bot():
+    executor.start_polling(dp, skip_updates=True)
