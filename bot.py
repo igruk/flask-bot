@@ -27,7 +27,7 @@ def sanitize_input(text: str) -> str:
     return text.strip()
 
 
-def is_valid_email(email: str) -> str:
+def is_valid_email(email: str) -> Match[str] | None:
     """Check if the given email is in a valid format."""
     return re.match(r'[^@]+@[^@]+\.[^@]+', email)
 
